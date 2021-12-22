@@ -183,11 +183,11 @@ export default class UserService {
     }
     //-----------------authentication end--------------------
 
+    //---------------fetching petitions started and signed by a member of the platform--------------------
     async retrieveStartedPetitions(userId) {
 
       try{
-        const result = await this.petitionDAOInstance.find({_id: userId});
-        console.log(result);
+        const result = await this.petitionDAOInstance.find({petitionStarter: mongoose.Types.ObjectId(userId)});
         return {success: "true", filteredPetitions: result};
       }
       catch(err)
@@ -195,6 +195,20 @@ export default class UserService {
         throw err;
       }
     }
+
+    async retrieveSignedPetitions(userId) {
+
+      try{
+        const result = await this.petitionDAOInstance.find({petitionStarter: mongoose.Types.ObjectId(userId)});
+        return {success: "true", filteredPetitions: result};
+      }
+      catch(err)
+      {
+        throw err;
+      }
+    }
+    //--------------------end----------------------------
+
 
     //---------------save petition to database-----------------
     async submitPetition(petitionRecord) {

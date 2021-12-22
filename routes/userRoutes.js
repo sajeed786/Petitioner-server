@@ -2,7 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import storage from '../middleware/imgUpload.js';
 
-import {signup, login, fblogin, activateAccount, submitPetition, getPetitionRecipients, getPetitionCategories, getStartedPetitions } from '../controllers/userController.js';
+import {signup, login, fblogin, activateAccount, submitPetition, getPetitionRecipients, getPetitionCategories, getStartedPetitions, getSignedPetitions } from '../controllers/userController.js';
 
 const upload = multer({storage: storage});
 
@@ -16,5 +16,6 @@ router.post('/submit-petition', upload.single("petitionMedia"), submitPetition);
 router.get('/petition-recipients', getPetitionRecipients);
 router.get('/petition-categories', getPetitionCategories);
 router.get('/:id/started-petitions', getStartedPetitions);
+router.get('/:id/signed-petitions', getSignedPetitions);
 
 export default router

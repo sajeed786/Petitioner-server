@@ -93,6 +93,19 @@ export const getStartedPetitions = async(req,res) => {
   }
 }
 
+export const getSignedPetitions = async(req,res) => {
+  console.log(req.params.id);
+  let response;
+  try{
+      response = await UserServiceObj.retrieveSignedPetitions(req.params.id);
+      return res.status(200).json({...response});
+  }
+  catch(err)
+  {
+      return res.status(500).json({...err});
+  }
+}
+
 export const submitPetition = async(req, res) => {
   
   const {userId, petitionCategory, petitionTitle, petitionRecipients, petitionText} = req.body;
